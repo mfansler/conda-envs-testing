@@ -37,6 +37,9 @@ jobs:
         
       - name: install micromamba
         uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: envs/mamba.yaml
+          environment-name: base
       
       - name: simulate environment creation
         run: |
