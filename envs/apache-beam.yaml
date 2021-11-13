@@ -1,0 +1,5 @@
+name: apache-beam
+channels:
+  - conda-forge
+dependencies:
+  - apache-beam
