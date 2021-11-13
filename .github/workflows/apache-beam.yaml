@@ -1,0 +1,44 @@
+name: apache-beam
+on:
+  push:
+    paths:
+      - 'envs/apache-beam.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: install micromamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: envs/apache-beam.yaml
+          environment-name: apache-beam
+          
+  simulate-osx-arm64:
+    name: simulate-osx-arm64
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: install micromamba
+        uses: mamba-org/provision-with-micromamb@main
+      
+      - name: simulate environment creation
+        run: |
+          CONDA_SUBIR=osx-arm64 mambabuild env create \
+          --dry-run \
+          --file envs/apache-beam.yaml
