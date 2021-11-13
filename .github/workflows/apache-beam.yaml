@@ -37,9 +37,12 @@ jobs:
         
       - name: install micromamba
         uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-name: mamba
       
       - name: simulate environment creation
         run: |
-          CONDA_SUBIR=osx-arm64 mambabuild env create \
+          micromamba activate mamba
+          CONDA_SUBIR=osx-arm64 mamba env create \
           --dry-run \
           --file envs/apache-beam.yaml
