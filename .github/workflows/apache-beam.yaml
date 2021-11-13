@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]  # windows not support
         
     steps:
       - name: checkout repository
@@ -44,6 +44,6 @@ jobs:
         shell: bash -l {0}
         run: |
           micromamba activate mamba
-          CONDA_SUBIR=osx-arm64 mamba env create \
+          CONDA_SUBDIR=osx-arm64 mamba env create \
             --dry-run \
             --file envs/apache-beam.yaml
