@@ -44,6 +44,8 @@ jobs:
         shell: bash -l {0}
         run: |
           micromamba activate mamba
-          CONDA_SUBDIR=osx-arm64 mamba env create \
+          CONDA_SUBDIR=osx-arm64 mamba create \
+            --name apache-beam \
             --dry-run \
-            --file envs/apache-beam.yaml
+            -c conda-forge \
+            apache-beam
