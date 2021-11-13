@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'envs/apache-beam.yaml'
+      - '.github/workflows/apache-beam.yaml'
 
 jobs:
   create-env:
