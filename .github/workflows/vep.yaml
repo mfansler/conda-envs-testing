@@ -1,0 +1,26 @@
+name: vep
+on:
+  push:
+    paths:
+      - 'envs/vep.yaml'
+      - '.github/workflows/vep.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]  # windows not support
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: install micromamba
+        uses: mamba-org/provision-with-micromamba@main
+        with:
+          environment-file: envs/vep.yaml
+          environment-name: vep
