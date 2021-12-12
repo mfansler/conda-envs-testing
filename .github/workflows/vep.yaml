@@ -27,7 +27,7 @@ jobs:
           channels: conda-forge,bioconda,defaults
           channel-priority: flexible
           activate-environment: vep
-          environment-file: envs/vep.yml
+          environment-file: envs/vep.yaml
       
       - name: test vep
         shell: bash -l {0}
