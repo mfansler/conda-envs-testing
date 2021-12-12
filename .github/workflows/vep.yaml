@@ -18,9 +18,18 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
-
-      - name: install micromamba
-        uses: mamba-org/provision-with-micromamba@main
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
         with:
-          environment-file: envs/vep.yaml
-          environment-name: vep
+          python-version: 3.9
+          mamba-version: "*"
+          channels: conda-forge,bioconda,defaults
+          channel-priority: flexible
+          activate-environment: vep
+          environment-file: envs/vep.yml
+      
+      - name: test vep
+        shell: bash -l {0}
+        run: |
+          vep --help
