@@ -1,0 +1,34 @@
+name: so-devenv
+on:
+  push:
+    paths:
+      - 'envs/so-devenv.yaml'
+      - '.github/workflows/so-devenv.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]  # windows not supported
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge,bioconda
+          channel-priority: flexible
+          activate-environment: so-devenv
+          environment-file: envs/so-devenv.yaml
+      
+      - name: check solution
+        shell: bash -l {0}
+        run: |
+          mamba env export
