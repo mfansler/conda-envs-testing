@@ -1,0 +1,51 @@
+## https://stackoverflow.com/q/70451652/570918
+name: so-devenv
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # Package creation and environment management
+  - conda-build
+  # Automation control (command line interface, workflow and multi-process management)
+  - python-dotenv
+  - click
+  - snakemake-minimal
+  - joblib
+  - numba
+  # Workspace
+  - notebook
+  # Visualization
+  - plotly
+  - plotly-orca
+  - matplotlib
+  - seaborn
+  - shap
+  - openpyxl
+  - ipywidgets
+  - tensorboard
+  # Data manipulation
+  - numpy
+  - pandas
+  - pyarrow
+  # Functional style tools
+  - more-itertools
+  - toolz
+  # Machine learning
+  - scikit-learn
+  - imbalanced-learn
+  - scikit-image
+  - statsmodels
+  - catboost
+  - hyperopt
+  - tsfresh
+  # Deep learning
+  - pytorch
+  # code checking and formatting
+  - pylint
+  - black
+  - flake8
+  - mypy
+  # Python base
+  - python
+  - pip
+  - pip:
