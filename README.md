@@ -5,4 +5,5 @@ This repository uses GitHub Actions to test for the ability to solve and create 
 | Environment | Platforms Tested | Status |
 | :---------: | :--------------: | :----: |
 | [apache-beam](envs/apache-beam.yaml) | linux-64, osx-64, osx-arm64 | [![apache-beam](https://github.com/mfansler/conda-envs-testing/actions/workflows/apache-beam.yaml/badge.svg)](https://github.com/mfansler/conda-envs-testing/actions/workflows/apache-beam.yaml) |
+| [so-devenv](envs/so-devenv.yaml) | linux-64 (ubuntu18, ubuntu20), osx-64 | [![so-devenv](https://github.com/mfansler/conda-envs-testing/actions/workflows/so-devenv.yaml/badge.svg)](https://github.com/mfansler/conda-envs-testing/actions/workflows/so-devenv.yaml) |
 | [vep](envs/vep.yaml) | linux-64, osx-64 | [![vep](https://github.com/mfansler/conda-envs-testing/actions/workflows/vep.yaml/badge.svg)](https://github.com/mfansler/conda-envs-testing/actions/workflows/vep.yaml) |
