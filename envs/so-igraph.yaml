@@ -1,0 +1,16 @@
+name: so-igraph
+channels:
+  - conda-forge
+dependencies:
+  - r-base
+  - r-shiny
+  - r-visnetwork
+  - r-dplyr
+  - r-dt
+  - r-igraph
+  - r-leaflet
+  - r-rgdal
+  - r-shinydashboard
+  - r-shinywidgets
+  - r-shinycssloaders
+  - r-igraph
