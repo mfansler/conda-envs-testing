@@ -1,0 +1,44 @@
+name: so-fiona
+on:
+  push:
+    paths:
+      - 'envs/so-fiona.yaml'
+      - '.github/workflows/so-fiona.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge
+          channel-priority: flexible
+          activate-environment: so-fiona
+          environment-file: envs/so-fiona.yaml
+      
+      - name: check solution
+        shell: bash -l {0}
+        run: |
+          mamba env export
+      
+      - name: test import
+        shell: bash -l {0}
+        run: |
+          python -c "import fiona"
+      
+      - name: test CLI
+        shell: bash -l {0}
+        run: |
+          fio --help
