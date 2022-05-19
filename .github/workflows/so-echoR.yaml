@@ -1,0 +1,47 @@
+name: so-echoR
+on:
+  push:
+    paths:
+      - '.github/workflows/so-echoR.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    env:
+      ENV_YAML: https://github.com/RajLabMSSM/echolocatoR/raw/master/inst/conda/echoR.yml
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create mambaforge base
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge,bioconda
+          channel-priority: flexible
+          auto-activate-base: true
+          activate-environment: ""
+      
+      - name: profile mamba env create
+        shell: bash -l {0}
+        run: |
+          conda clean -qafy
+          /usr/bin/time -v mamba env create -n echoR_m -f ${ENV_YAML}
+      
+      - name: profile conda env create
+        shell: bash -l {0}
+        run: |
+          conda clean -qafy
+          /usr/bin/time -v conda env create -n echoR_c -f ${ENV_YAML}
+      
+      - name: install echolocatoR
+        shell: bash -l {0}
+        run: |
+          conda activate echoR_c
+          Rscript -e 'remotes::install_github("RajLabMSSM/echolocatoR"); library(echolocatoR)'
