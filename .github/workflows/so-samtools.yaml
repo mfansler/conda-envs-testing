@@ -38,4 +38,4 @@ jobs:
       - name: test samtools
         run: |
           which samtools
-          samtools
+          samtools help
