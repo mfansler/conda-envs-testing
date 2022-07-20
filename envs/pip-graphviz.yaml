@@ -1,0 +1,8 @@
+name: pip-graphviz
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - pip 
+  - pip: 
+    - graphviz
