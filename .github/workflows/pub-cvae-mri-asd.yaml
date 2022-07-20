@@ -2,8 +2,8 @@ name: pub-cvae-mri-asd
 on:
   push:
     paths:
-      - 'envs/pub-cvae-mri-asd.yaml'
-      - '.github/workflows/pub-cvae-mri-asd.full.yaml'
+      - 'envs/pub-cvae-mri-asd.full.yaml'
+      - '.github/workflows/pub-cvae-mri-asd.yaml'
 
 jobs:
   create-env:
