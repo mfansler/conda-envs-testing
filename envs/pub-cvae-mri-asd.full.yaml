@@ -332,7 +332,7 @@ dependencies:
   - pip: 
     - absl-py==0.11.0 
     - ansiwrap==0.8.4 
-    - antspyx==0.2.4 
+    - git+https://github.com/ANTsX/ANTsPy.git@v0.2.4 
     - appdirs==1.4.4 
     - astor==0.8.1 
     - asttokens==2.0.5 
