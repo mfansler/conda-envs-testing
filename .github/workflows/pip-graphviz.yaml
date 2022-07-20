@@ -8,7 +8,7 @@ on:
 jobs:
   create-env:
     name: ${{ matrix.os }} 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
     defaults:
       run:
         shell: bash -l {0}
@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu, macos, windows]
         
     steps:
       - name: checkout repository
@@ -25,15 +25,20 @@ jobs:
       - name: create environment with conda
         uses: conda-incubator/setup-miniconda@v2
         with:
+          miniforge-version: latest
           channels: conda-forge
           auto-activate-base: false
           activate-environment: pip-graphviz
           environment-file: envs/pip-graphviz.yaml
       
-      - name: check solution (conda env)
+      - name: conda info
+        run: |
+          conda info
+          
+      - name: conda env export
         run: |
           conda env export
       
-      - name: check solution (conda list)
+      - name: conda list --export
         run: |
           conda list --export
