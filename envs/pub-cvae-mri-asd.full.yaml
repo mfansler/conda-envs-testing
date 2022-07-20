@@ -332,6 +332,7 @@ dependencies:
   - pip: 
     - absl-py==0.11.0 
     - ansiwrap==0.8.4 
+    ## EDIT: antspyx v0.2.4 is not on PyPI; using GitHub
     - git+https://github.com/ANTsX/ANTsPy.git@v0.2.4 
     - appdirs==1.4.4 
     - astor==0.8.1 
@@ -413,7 +414,9 @@ dependencies:
     - pynacl==1.4.0 
     - pyrcca==0.2 
     - pytest==6.2.5 
-    - python-graphviz==0.18.2 
+    ## EDIT: changed 'python-graphviz' to 'graphviz'
+    ## see https://github.com/conda/conda/issues/10742
+    - graphviz==0.18.2 
     - python-levenshtein==0.12.2 
     - python-louvain==0.15 
     - pytools==2021.1.2 
