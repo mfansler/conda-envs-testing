@@ -28,6 +28,7 @@ jobs:
           miniforge-version: latest
           channels: conda-forge
           auto-activate-base: true
+          auto_update_conda: true
       
       - name: update conda
         run: |
