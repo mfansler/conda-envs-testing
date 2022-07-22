@@ -1,0 +1,51 @@
+name: pip-graphviz
+on:
+  push:
+    paths:
+      - 'envs/pip-graphviz.yaml'
+      - '.github/workflows/pip-graphviz.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+        
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu, macos, windows]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          miniforge-version: latest
+          channels: conda-forge
+          auto-activate-base: true
+          auto_update_conda: true
+      
+      - name: update conda
+        run: |
+          conda update -n base conda
+          
+      - name: conda info
+        run: |
+          conda info
+      
+      - name: create environment
+        run: |
+          conda env create -n pip-graphviz -f envs/pip-graphviz.yaml
+      
+      - name: conda env export
+        run: |
+          conda env export -n pip-graphviz
+      
+      - name: conda list --export
+        run: |
+          conda list --export -n pip-graphviz
