@@ -39,9 +39,9 @@ jobs:
           use-public-rspm: true
 
       - name: install reticulate
-        uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: any::reticulate, any::tensorflow
+        shell: Rscript {0}
+        run: |
+          install.packages(c("reticulate", "tensorflow"), repos="https://cran.rstudio.com")
       
       - name: test reticulate
         shell: Rscript {0}
