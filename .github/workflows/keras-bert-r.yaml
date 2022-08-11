@@ -1,0 +1,51 @@
+name: keras-bert-r
+on:
+  push:
+    paths:
+      - 'envs/bert_env.yaml'
+      - '.github/workflows/keras-bert-r.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge
+          auto-activate-base: false
+          environment-file: envs/bert_env.yaml
+      
+      - name: check solution
+        shell: bash -l {0}
+        run: |
+          mamba env export -n bert_env
+      
+      - name: setup R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: install reticulate
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::reticulate, any::tensorflow
+      
+      - name: test reticulate
+        shell: Rscript {0}
+        run: |
+          reticulate::use_condaenv("bert_env", required=TRUE)
+          reticulate::py_config()
+          reticulate::py_module_available("keras_bert")
+          tensorflow::tf_config()
