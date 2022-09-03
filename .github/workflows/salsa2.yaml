@@ -1,0 +1,36 @@
+name: salsa2
+on:
+  push:
+    paths:
+      - 'envs/salsa2.yaml'
+      - '.github/workflows/salsa2.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+        
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge,bioconda
+          auto-activate-base: false
+          activate-environment: salsa2
+          environment-file: envs/salsa2.yaml
+      
+      - name: check solution
+        run: |
+          mamba env export
