@@ -1,0 +1,7 @@
+name: so-geopandas-py27
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=2.7
+  - geopandas
