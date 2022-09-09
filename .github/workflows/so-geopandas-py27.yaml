@@ -1,0 +1,38 @@
+name: so-geopands-py27
+on:
+  push:
+    paths:
+      - 'envs/so-geopands-py27.yaml'
+      - '.github/workflows/so-geopands-py27.yaml'
+
+jobs:
+  create-env:
+    name: ${{ matrix.os }} 
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+        
+      - name: create environment with mamba
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          mamba-version: "*"
+          channels: conda-forge
+          activate-environment: so-geopands-py27
+          environment-file: envs/so-geopands-py27.yaml
+      
+      - name: check solution
+        shell: bash -l {0}
+        run: |
+          mamba env export
+      
+      - name: test import
+        shell: bash -l {0}
+        run: |
+          python -c "import geopandas"
