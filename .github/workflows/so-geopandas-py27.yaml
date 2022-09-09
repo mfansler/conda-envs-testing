@@ -23,7 +23,8 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2
         with:
           mamba-version: "*"
-          channels: conda-forge
+          channels: conda-forge,defaults
+          channel-priority: flexible
           activate-environment: so-geopandas-py27
           environment-file: envs/so-geopandas-py27.yaml
       
