@@ -1,9 +1,9 @@
-name: so-geopands-py27
+name: so-geopandas-py27
 on:
   push:
     paths:
-      - 'envs/so-geopands-py27.yaml'
-      - '.github/workflows/so-geopands-py27.yaml'
+      - 'envs/so-geopandas-py27.yaml'
+      - '.github/workflows/so-geopandas-py27.yaml'
 
 jobs:
   create-env:
@@ -24,8 +24,8 @@ jobs:
         with:
           mamba-version: "*"
           channels: conda-forge
-          activate-environment: so-geopands-py27
-          environment-file: envs/so-geopands-py27.yaml
+          activate-environment: so-geopandas-py27
+          environment-file: envs/so-geopandas-py27.yaml
       
       - name: check solution
         shell: bash -l {0}
